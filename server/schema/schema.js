@@ -5,6 +5,7 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
 } = graphql;
 
 const movies = [
@@ -26,6 +27,13 @@ const movies = [
     name: "Game of thrones",
     genre: "fantasy, thriller",
     directorId: "4",
+  },
+  { id: "5", name: "Pulp Fiction", genre: "drama, thriller", directorId: "1" },
+  {
+    id: "6",
+    name: "Inglourious Basterds",
+    genre: "adventure , thriller",
+    directorId: "1",
   },
 ];
 
@@ -61,6 +69,12 @@ const DirectorType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     age: { type: GraphQLInt },
+    movies: {
+      type: new GraphQLList(MovieType),
+      resolve(parent, args) {
+        return movies.filter((movie) => movie.directorId == parent.id);
+      },
+    },
   }),
 });
 
@@ -79,6 +93,18 @@ const Query = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return directors.find((director) => director.id == args.id);
+      },
+    },
+    movies: {
+      type: new GraphQLList(MovieType),
+      resolve(parent, args) {
+        return movies;
+      },
+    },
+    directors: {
+      type: new GraphQLList(DirectorType),
+      resolve(parent, args) {
+        return directors;
       },
     },
   },
