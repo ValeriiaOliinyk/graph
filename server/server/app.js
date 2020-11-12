@@ -7,7 +7,7 @@ const app = express();
 const PORT = 8000;
 
 mongoose.connect(
-  "mongodb+srv://admin:qwertyadmin@contacts.fceyb.mongodb.net/qraphql?retryWrites=true",
+  "mongodb+srv://admin:qwertyadmin@contacts.fceyb.mongodb.net/qraphql",
   {
     useMongoClient: true,
     useUnifiedTopology: true,
