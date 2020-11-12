@@ -8,6 +8,46 @@ const {
   GraphQLList,
 } = graphql;
 
+// const directorsJson = [
+//   {  name: "Quentin Tarantino", age: 57 }, 5fad4f4b87e1ab806eb84f23
+//   {  name: "Stephen Sommers", age: 58 }, 5fad52a487e1ab806eb84f29
+//   {
+//
+//     name: "Chris Columbus", 5fad523c87e1ab806eb84f27
+//     age: 62,
+//   },
+//   {  name: "David Benioff", age: 50 }, 5fad525e87e1ab806eb84f28
+// ];
+
+// const moviesJson = [
+//   { name: "Kill Bill", genre: "drama, thriller", directorId: 5fad4f4b87e1ab806eb84f23 },
+//   {
+//
+//     name: "Mummy",
+//     genre: "fantasy, horror, thriller",
+//     directorId: 5fad52a487e1ab806eb84f29,
+//   },
+//   {
+//
+//     name: "Harry Potter and the Chamber of Secrets",
+//     genre: "fantasy",
+//     directorId: 5fad523c87e1ab806eb84f27,
+//   },
+//   {
+//
+//     name: "Game of thrones",
+//     genre: "fantasy, thriller",
+//     directorId: 5fad525e87e1ab806eb84f28,
+//   },
+//   {  name: "Pulp Fiction", genre: "drama, thriller", directorId: 5fad4f4b87e1ab806eb84f23 },
+//   {
+//
+//     name: "Inglourious Basterds",
+//     genre: "adventure , thriller",
+//     directorId: 5fad4f4b87e1ab806eb84f23,
+//   },
+// ];
+
 const movies = [
   { id: "1", name: "Kill Bill", genre: "drama, thriller", directorId: "1" },
   {
@@ -57,7 +97,7 @@ const MovieType = new GraphQLObjectType({
     director: {
       type: DirectorType,
       resolve(parent, args) {
-        return directors.find((director) => director.id == parent.id);
+        // return directors.find((director) => director.id == parent.id);
       },
     },
   }),
@@ -72,7 +112,7 @@ const DirectorType = new GraphQLObjectType({
     movies: {
       type: new GraphQLList(MovieType),
       resolve(parent, args) {
-        return movies.filter((movie) => movie.directorId == parent.id);
+        // return movies.filter((movie) => movie.directorId == parent.id);
       },
     },
   }),
@@ -85,14 +125,14 @@ const Query = new GraphQLObjectType({
       type: MovieType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return movies.find((movie) => movie.id == args.id);
+        // return movies.find((movie) => movie.id == args.id);
       },
     },
     director: {
       type: DirectorType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return directors.find((director) => director.id == args.id);
+        // return directors.find((director) => director.id == args.id);
       },
     },
     movies: {
